@@ -6,25 +6,25 @@ import { Http, Headers, Response } from "@angular/http";
 @Injectable()
 export class UserService {
     constructor(private http: Http) { }
-   
-  register(user: User) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
 
-    return this.http.post(
-      Config.apiUrl + "Users",
-      JSON.stringify({
-        Username: user.email,
-        Email: user.email,
-        Password: user.password
-      }),
-      { headers: headers }
-    )
-    .catch(this.handleErrors);
-  }
+    register(user: User) {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
 
-  handleErrors(error: Response) {
-    console.log(JSON.stringify(error.json()));
-    return Observable.throw(error);
-  }
+        return this.http.post(
+            Config.apiUrl + "Users",
+            JSON.stringify({
+                Username: user.email,
+                Email: user.email,
+                Password: user.password
+            }),
+            { headers: headers }
+        )
+            .catch(this.handleErrors);
+    }
+
+    handleErrors(error: Response) {
+        console.log(JSON.stringify(error.json()));
+        return Observable.throw(error);
+    }
 }
